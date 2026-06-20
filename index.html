@@ -6,618 +6,284 @@
 
 <title>Vocab Practice Y6A</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Kanit',sans-serif;
-}
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap');
 
 body{
-background:linear-gradient(135deg,#667eea,#764ba2);
-min-height:100vh;
+font-family:'Kanit',sans-serif;
+margin:0;
+background:linear-gradient(135deg,#6a5acd,#836fff);
 display:flex;
 justify-content:center;
 align-items:center;
-padding:20px;
+min-height:100vh;
+padding:15px;
 }
 
 .container{
-width:100%;
-max-width:700px;
-background:white;
+background:rgba(255,255,255,0.95);
+backdrop-filter:blur(10px);
+padding:25px;
 border-radius:25px;
-padding:30px;
-box-shadow:0 15px 40px rgba(0,0,0,.2);
+width:100%;
+max-width:650px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+animation:fadeIn .5s ease;
+}
+
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(10px);}
+to{opacity:1;transform:translateY(0);}
 }
 
 h1{
 text-align:center;
-color:#5a3ec8;
+color:#4b3cc4;
 margin-bottom:10px;
-font-size:2rem;
-}
-
-.subtitle{
-text-align:center;
-color:#666;
-margin-bottom:25px;
+font-weight:600;
 }
 
 .progress{
-height:12px;
-background:#e5e5e5;
-border-radius:999px;
+height:10px;
+background:#eee;
+border-radius:50px;
 overflow:hidden;
-margin-bottom:20px;
+margin:15px 0;
 }
 
-.progress-bar{
+.bar{
 height:100%;
 width:0%;
-background:linear-gradient(90deg,#667eea,#764ba2);
+background:linear-gradient(90deg,#6a5acd,#836fff);
 transition:.3s;
 }
 
-.question-box{
-background:#f8f8ff;
-padding:25px;
-border-radius:20px;
-text-align:center;
-}
-
-.question-number{
-font-size:1.2rem;
-font-weight:600;
-color:#764ba2;
-margin-bottom:10px;
-}
-
-.question-type{
-font-size:1rem;
-color:#555;
-margin-bottom:20px;
-}
-
-.listen-btn{
+button{
+font-family:'Kanit',sans-serif;
 border:none;
-background:#667eea;
-color:white;
-font-size:1.1rem;
-padding:14px 24px;
-border-radius:15px;
+padding:12px;
+border-radius:12px;
 cursor:pointer;
-transition:.2s;
-margin-bottom:20px;
-}
-
-.listen-btn:hover{
-transform:scale(1.05);
-}
-
-.answer-input{
 width:100%;
-padding:15px;
-border:2px solid #ddd;
-border-radius:15px;
-font-size:1rem;
-outline:none;
-margin-bottom:15px;
-}
-
-.answer-input:focus{
-border-color:#667eea;
-}
-
-.submit-btn{
-width:100%;
-border:none;
-padding:15px;
-border-radius:15px;
-font-size:1rem;
-font-weight:600;
-background:#764ba2;
-color:white;
-cursor:pointer;
-}
-
-.submit-btn:hover{
-opacity:.9;
-}
-
-.message{
-margin-top:15px;
-text-align:center;
+margin-top:10px;
 font-weight:500;
-color:red;
+transition:.2s;
 }
 
-.loading-screen{
-display:none;
+button:hover{
+transform:scale(1.02);
+}
+
+button:first-of-type{
+background:#6a5acd;
+color:white;
+}
+
+button:last-of-type{
+background:#4b3cc4;
+color:white;
+}
+
+input{
+width:100%;
+padding:12px;
+border-radius:12px;
+border:2px solid #eee;
+margin-top:10px;
+font-size:16px;
+font-family:'Kanit',sans-serif;
+outline:none;
+transition:.2s;
+}
+
+input:focus{
+border-color:#6a5acd;
+box-shadow:0 0 5px rgba(106,90,205,0.3);
+}
+
+.hidden{display:none}
+
+#msg{
+color:#ff4d4d;
 text-align:center;
+margin-top:10px;
+font-weight:500;
 }
 
-.loading-title{
-font-size:1.4rem;
-margin-bottom:20px;
-color:#764ba2;
+.center{text-align:center}
+
+h2,h3,p{
+font-family:'Kanit',sans-serif;
 }
-
-.loading-bar{
-height:20px;
-background:#ddd;
-border-radius:999px;
-overflow:hidden;
-}
-
-.loading-fill{
-width:0%;
-height:100%;
-background:linear-gradient(90deg,#667eea,#764ba2);
-}
-
-.result-screen{
-display:none;
-}
-
-.score{
-font-size:2rem;
-font-weight:700;
-text-align:center;
-color:#5a3ec8;
-margin-bottom:20px;
-}
-
-.answers-list{
-background:#f8f8ff;
-padding:20px;
-border-radius:15px;
-max-height:450px;
-overflow:auto;
-}
-
-.answer-item{
-padding:10px;
-border-bottom:1px solid #ddd;
-}
-
-@media(max-width:600px){
-
-.container{
-padding:20px;
-}
-
-h1{
-font-size:1.6rem;
-}
-
-}
-
 </style>
 </head>
+
 <body>
 
 <div class="container">
 
-<div id="gameScreen">
-
 <h1>Vocab Practice Y6A</h1>
 
-<div class="subtitle">
-Listen and type word
+<div class="progress"><div class="bar" id="bar"></div></div>
+
+<div id="game">
+
+<h3 id="qnum"></h3>
+<p id="type"></p>
+
+<button onclick="speak()">🔊 Listen</button>
+
+<input id="ans" placeholder="Type answer">
+
+<button onclick="submit()">Submit</button>
+
+<p id="msg"></p>
+
 </div>
 
-<div class="progress">
-<div class="progress-bar" id="progressBar"></div>
+<div id="loading" class="hidden center">
+<h2>Checking...</h2>
 </div>
 
-<div class="question-box">
-
-<div class="question-number" id="questionNumber">
-Question 1 / 20
-</div>
-
-<div class="question-type" id="questionType">
-Listen and type word
-</div>
-
-<button class="listen-btn" id="listenBtn">
-🔊 Listen
-</button>
-
-<input
-type="text"
-id="answerInput"
-class="answer-input"
-placeholder="Type your answer here..."
-autocomplete="off"
->
-
-<button class="submit-btn" id="submitBtn">
-Submit
-</button>
-
-<div class="message" id="message"></div>
-
+<div id="result" class="hidden">
+<h2 class="center" id="score"></h2>
+<div id="review"></div>
 </div>
 
 </div>
 
-<div class="loading-screen" id="loadingScreen">
-
-<div class="loading-title">
-Checking...
-</div>
-
-<div class="loading-bar">
-<div class="loading-fill" id="loadingFill"></div>
-</div>
-
-</div>
-
-<div class="result-screen" id="resultScreen">
-
-<div class="score" id="scoreText">
-0 / 20
-</div>
-
-<div class="answers-list" id="answersList">
-</div>
-
-</div>
-
-</div>
 <script>
 
-const listenWords = [
-"mass",
-"crust",
-"gradually",
-"erupt",
-"sections",
-"to divide exactly",
-"least common multiple",
-"highest common factors",
-"repeated",
-"list",
-"concussion",
-"pathogen",
-"fungi",
-"protist",
-"virus",
-"etiquette",
-"greet",
-"acknowledgement",
-"reserve",
-"prostration"
+// 🔊 unlock sound (iPhone fix)
+document.body.addEventListener("click", () => {
+speechSynthesis.resume();
+},{once:true});
+
+// 📚 words
+const words = [
+"mass","crust","gradually","erupt","sections",
+"to divide exactly","least common multiple","highest common factors",
+"repeated","list","concussion","pathogen","fungi","protist","virus",
+"etiquette","greet","acknowledgement","reserve","prostration"
 ];
 
-const meaningQuestions = [
-{
-question:"Say words of welcome",
-answer:"greet"
-},
-{
-question:"something that happens slowly in process",
-answer:"gradually"
-},
-{
-question:"a mild brain injury caused by a bump or blow to the head",
-answer:"concussion"
-}
-];
-
-const sentenceQuestions = [
-{
-word:"mass",
-answer:"mass"
-},
-{
-word:"etiquette",
-answer:"etiquette"
-}
-];
-
-function shuffleArray(arr){
-
-let array=[...arr];
-
-for(let i=array.length-1;i>0;i--){
-
-const j=Math.floor(Math.random()*(i+1));
-
-[array[i],array[j]]=[array[j],array[i]];
-
-}
-
-return array;
-
-}
-
-let savedOrder=localStorage.getItem("y6a_vocab_order");
-
-let randomWords;
-
-if(savedOrder){
-
-randomWords=JSON.parse(savedOrder);
-
-}else{
-
-randomWords=shuffleArray(listenWords);
-
-localStorage.setItem(
-"y6a_vocab_order",
-JSON.stringify(randomWords)
-);
-
-}
-
-const questions=[];
-
-for(let i=0;i<15;i++){
-
-questions.push({
-type:"listen",
-text:randomWords[i],
-answer:randomWords[i]
-});
-
-}
-
-questions.push({
-type:"meaning",
-text:meaningQuestions[0].question,
-answer:meaningQuestions[0].answer
-});
-
-questions.push({
-type:"meaning",
-text:meaningQuestions[1].question,
-answer:meaningQuestions[1].answer
-});
-
-questions.push({
-type:"meaning",
-text:meaningQuestions[2].question,
-answer:meaningQuestions[2].answer
-});
-
-questions.push({
-type:"sentence",
-text:sentenceQuestions[0].word,
-answer:sentenceQuestions[0].answer
-});
-
-questions.push({
-type:"sentence",
-text:sentenceQuestions[1].word,
-answer:sentenceQuestions[1].answer
-});
-
-let currentQuestion=0;
-
+let q=[];
+let idx=0;
 let score=0;
+let user=[];
 
-let userAnswers=[];
-
-const questionNumber=
-document.getElementById("questionNumber");
-
-const questionType=
-document.getElementById("questionType");
-
-const answerInput=
-document.getElementById("answerInput");
-
-const progressBar=
-document.getElementById("progressBar");
-
-const listenBtn=
-document.getElementById("listenBtn");
-
-const submitBtn=
-document.getElementById("submitBtn");
-
-const message=
-document.getElementById("message");
-
-function loadQuestion(){
-
-const q=questions[currentQuestion];
-
-questionNumber.textContent=
-`Question ${currentQuestion+1} / 20`;
-
-progressBar.style.width=
-`${((currentQuestion)/20)*100}%`;
-
-if(q.type==="listen"){
-
-questionType.textContent=
-"Listen and type word";
-
+// shuffle
+function shuffle(a){
+return a.sort(()=>Math.random()-0.5);
 }
 
-else if(q.type==="meaning"){
+let saved = localStorage.getItem("y6a_vocab");
 
-questionType.textContent=
-"Write word in meaning";
-
+if(saved){
+q = JSON.parse(saved);
+}else{
+q = shuffle(words).map(w=>({q:w,a:w}));
+localStorage.setItem("y6a_vocab",JSON.stringify(q));
 }
 
-else{
+document.getElementById("qnum").innerText="Question 1/20";
+document.getElementById("type").innerText="Listen and type word";
 
-questionType.textContent=
-"Write word in the sentence";
-
-}
-
-answerInput.value="";
-
-message.textContent="";
-
-}
-
-function speakCurrentQuestion(){
-
-const q=questions[currentQuestion];
-
-const speech=
-new SpeechSynthesisUtterance();
-
-speech.lang="en-US";
-
-speech.rate=0.8;
-
-speech.text=q.text;
+// 🔊 speak FIX (mobile stable)
+function speak(){
 
 speechSynthesis.cancel();
 
-speechSynthesis.speak(speech);
+setTimeout(()=>{
 
+let u = new SpeechSynthesisUtterance(q[idx].q);
+
+u.lang="en-US";
+u.rate=0.9;
+u.volume=1;
+
+// force voice
+let v = speechSynthesis.getVoices();
+if(v.length) u.voice = v.find(x=>x.lang.includes("en")) || v[0];
+
+speechSynthesis.speak(u);
+
+},100);
 }
 
-loadQuestion();
+// submit
+function submit(){
 
-</script>
-<script>
+let a=document.getElementById("ans").value.trim();
 
-listenBtn.addEventListener("click",()=>{
-
-speakCurrentQuestion();
-
-});
-
-submitBtn.addEventListener("click",submitAnswer);
-
-answerInput.addEventListener("keydown",(e)=>{
-
-if(e.key==="Enter"){
-
-submitAnswer();
-
-}
-
-});
-
-function submitAnswer(){
-
-const answer=
-answerInput.value.trim();
-
-if(answer===""){
-
-message.textContent=
-"You need to answer first";
-
+if(!a){
+document.getElementById("msg").innerText="You need to answer first";
 return;
-
 }
 
-message.textContent="";
+document.getElementById("msg").innerText="";
 
-const correctAnswer=
-questions[currentQuestion].answer;
+if(a.toLowerCase()===q[idx].a.toLowerCase()) score++;
 
-userAnswers.push({
-questionNumber:currentQuestion+1,
-userAnswer:answer,
-correctAnswer:correctAnswer,
-correct:
-answer.toLowerCase()===
-correctAnswer.toLowerCase()
+user.push({
+q:q[idx].q,
+a:a,
+c:q[idx].a
 });
 
-if(
-answer.toLowerCase()===
-correctAnswer.toLowerCase()
-){
+idx++;
 
-score++;
+if(idx<q.length){
+load();
+}else{
+finish();
+}
+}
+
+function load(){
+
+document.getElementById("ans").value="";
+
+document.getElementById("qnum").innerText=`Question ${idx+1}/20`;
+
+document.getElementById("bar").style.width=(idx/q.length)*100+"%";
 
 }
 
-currentQuestion++;
+// finish
+function finish(){
 
-if(currentQuestion<20){
+document.getElementById("game").classList.add("hidden");
+document.getElementById("loading").classList.remove("hidden");
 
-loadQuestion();
+let p=0;
+let i=setInterval(()=>{
+p+=2;
+if(p>=100){
+clearInterval(i);
+show();
+}
+},30);
 
 }
 
-else{
+// result
+function show(){
 
-showLoading();
+document.getElementById("loading").classList.add("hidden");
+document.getElementById("result").classList.remove("hidden");
 
-}
+document.getElementById("score").innerText=`Score: ${score}/${q.length}`;
 
-}
+let r="";
 
-</script>
-<script>
-
-function showLoading(){
-
-document.getElementById("gameScreen").style.display="none";
-
-document.getElementById("loadingScreen").style.display="block";
-
-let width=0;
-
-const bar=
-document.getElementById("loadingFill");
-
-const timer=setInterval(()=>{
-
-width+=2;
-
-bar.style.width=width+"%";
-
-if(width>=100){
-
-clearInterval(timer);
-
-showResults();
-
-}
-
-},40);
-
-}
-
-function showResults(){
-
-document.getElementById("loadingScreen").style.display="none";
-
-document.getElementById("resultScreen").style.display="block";
-
-document.getElementById("scoreText").textContent=
-`${score} / 20`;
-
-const answersList=
-document.getElementById("answersList");
-
-answersList.innerHTML="";
-
-questions.forEach((q,index)=>{
-
-const item=
-document.createElement("div");
-
-item.className="answer-item";
-
-item.innerHTML=`
-<b>${index+1}.</b> ${q.answer}
-`;
-
-answersList.appendChild(item);
-
+user.forEach((x,i)=>{
+r+=`<p>${i+1}. ${x.q} → your: ${x.a} | correct: ${x.c}</p>`;
 });
+
+document.getElementById("review").innerHTML=r;
 
 }
 
